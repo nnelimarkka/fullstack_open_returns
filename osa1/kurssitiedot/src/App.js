@@ -6,18 +6,21 @@ const Header = (props) => (
 
 const Content = (props) => (
   <>
-    <Part part={props.part1}></Part>
-    <Part part={props.part2}></Part>
-    <Part part={props.part3}></Part>
+    <Part part={props.parts[0]}></Part>
+    <Part part={props.parts[1]}></Part>
+    <Part part={props.parts[2]}></Part>
   </>
 )
 const Part = (props) => (
   <p>{props.part.name} {props.part.exercises}</p>
 )
 
-const Total = (props) => (
-  <p>Number of exercises {props.numExercises}</p>
-)
+const Total = (props) => {
+  const numExcercises = props.parts[0]["exercises"] + props.parts[1]["exercises"] + props.parts[2]["exercises"];
+  return (
+    <p>Number of exercises {numExcercises}</p>
+  )
+  }
 
 const App = () => {
   const course = 'Half Stack application development'
@@ -39,8 +42,8 @@ const App = () => {
   return (
     <div>
       <Header course={course}/>
-      <Content part1={parts[0]} part2={parts[1]} part3={parts[2]}/>
-      <Total numExercises={parts[0].exercises + parts[1].exercises + parts[2].exercises}/>
+      <Content parts={parts}/>
+      <Total parts={parts}/>
     </div>
   )
 }
